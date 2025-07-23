@@ -1,0 +1,2 @@
+CREATE DATABASE productos;
+CREATE DATABASE inventario;
