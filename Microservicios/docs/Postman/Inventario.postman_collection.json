@@ -1,0 +1,93 @@
+{
+  "info": {
+    "name": "Inventario API",
+    "_postman_id": "12345678-1234-5678-9012-abcdefabcdef",
+    "description": "Colección de endpoints para el microservicio de inventario",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Consultar inventario por producto ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "123456",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8082/inventario/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["inventario", "1"]
+        }
+      }
+    },
+    {
+      "name": "Actualizar cantidad de inventario",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "123456",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cantidad\": 50\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8082/inventario/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["inventario", "1"]
+        }
+      }
+    },
+    {
+      "name": "Realizar compra",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "123456",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"productoId\": 1,\n  \"cantidad\": 2\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8082/inventario/compras",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["inventario", "compras"]
+        }
+      }
+    }
+  ]
+}

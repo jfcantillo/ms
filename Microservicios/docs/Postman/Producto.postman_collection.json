@@ -1,0 +1,89 @@
+{
+  "info": {
+    "name": "Producto API",
+    "_postman_id": "abcdef12-3456-7890-abcd-ef1234567890",
+    "description": "Colección de endpoints del microservicio de producto",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Crear nuevo producto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "123456",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Laptop\",\n  \"precio\": 1299.99,\n  \"descripcion\": \"Ultrabook de alto rendimiento\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8081/producto",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["producto"]
+        }
+      }
+    },
+    {
+      "name": "Obtener producto por ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "123456",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8081/producto/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["producto", "1"]
+        }
+      }
+    },
+    {
+      "name": "Listar todos los productos",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "123456",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8081/producto",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["producto"]
+        }
+      }
+    }
+  ]
+}
