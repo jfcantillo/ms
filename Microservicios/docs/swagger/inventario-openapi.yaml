@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: API de Inventario
+  version: 1.0.0
+servers:
+  - url: http://localhost:8082
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+
+  schemas:
+    Inventario:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              example: inventarios
+            id:
+              type: string
+            attributes:
+              type: object
+              properties:
+                productoId:
+                  type: integer
+                cantidad:
+                  type: integer
+
+paths:
+  /inventario/{productoId}:
+    parameters:
+      - in: path
+        name: productoId
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Consultar cantidad disponible
+      security:
+        - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Cantidad disponible
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventario'
+        '404':
+          description: Producto no encontrado
+    put:
+      summary: Actualizar cantidad en inventario
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cantidad:
+                  type: integer
+      responses:
+        '200':
+          description: Cantidad actualizada
+        '400':
+          description: Error al actualizar cantidad
+
+  /inventario/compras:
+    post:
+      summary: Realizar compra de producto
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productoId:
+                  type: integer
+                cantidad:
+                  type: integer
+      responses:
+        '200':
+          description: Compra realizada con éxito
+        '400':
+          description: Producto no encontrado o inventario insuficiente

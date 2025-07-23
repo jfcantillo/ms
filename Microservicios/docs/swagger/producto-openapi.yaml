@@ -1,0 +1,95 @@
+openapi: 3.0.3
+info:
+  title: API de Productos
+  version: 1.0.0
+servers:
+  - url: http://localhost:8081
+paths:
+  /productos:
+    post:
+      summary: Crear un nuevo producto
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductoInput'
+      responses:
+        '201':
+          description: Producto creado
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Producto'
+    get:
+      summary: Listar todos los productos
+      security:
+        - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Lista de productos
+          content:
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'
+  /productos/{id}:
+    get:
+      summary: Obtener un producto por ID
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Producto encontrado
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Producto'
+        '404':
+          description: Producto no encontrado
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+  schemas:
+    ProductoInput:
+      type: object
+      properties:
+        nombre:
+          type: string
+        precio:
+          type: number
+        descripcion:
+          type: string
+    Producto:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              example: productos
+            id:
+              type: string
+            attributes:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                precio:
+                  type: number
+                descripcion:
+                  type: string
